@@ -16,7 +16,9 @@ const handleIncrement = () => {
       <li><router-link to="/about">About</router-link></li>
     </ul>
 
-    <p>Clicking between routes will also reset the data and re-fetch it using route guards in <strong>vue-router</strong>.</p>
+    <p>
+      This repo uses two composables to show that <strong>serverPrefetch</strong> does not work as written in the Vue documentation. The way to fix it is to use <strong>Pinia</strong> and a store to persist the data. Additionally, it addresses the issue of clearing the data and refetching it when the route changes.
+    </p>
 
     <router-view></router-view>
 
