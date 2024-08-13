@@ -6,11 +6,11 @@ import { defineStore } from 'pinia';
 // and `Store` (e.g. `useUserStore`, `useCartStore`, `useProductStore`)
 // the first argument is a unique id of the store across your application
 export const useFetchDataStore = defineStore('fetch-data', () => {
-  const data = ref(null);
+    const data = ref(null);
 
-  function $reset() {
-    data.value = null;
-  }
+    function $reset() {
+        data.value = null;
+    }
 
-  return { data, $reset };
+    return { data, $reset };
 });

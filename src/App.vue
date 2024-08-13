@@ -16,7 +16,7 @@ const handleIncrement = () => {
       <li><router-link to="/about">About</router-link></li>
     </ul>
 
-    <p>There are some bugs with the routing operations. Going from Home <> About still needs to reset the data. As-is, the static single home load will showcase the bug properly but there are still issues to solve.</p>
+    <p>Clicking between routes will also reset the data and re-fetch it using route guards in <pre>vue-router</pre>.</p>
 
     <router-view></router-view>
 

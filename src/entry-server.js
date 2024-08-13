@@ -9,18 +9,18 @@ import { createApp } from './main';
  */
 
 export const render = async (req) => {
-  const { app, pinia, router } = createApp();
+    const { app, pinia, router } = createApp();
 
-  // Set base url
-  router.push(req.url);
-  await router.isReady();
+    // Set base url
+    router.push(req.url);
+    await router.isReady();
 
-  const html = await renderToString(app);
+    const html = await renderToString(app);
 
-  const initialState = JSON.stringify(pinia.state.value);
+    const initialState = JSON.stringify(pinia.state.value);
 
-  return {
-    html,
-    initialState,
-  };
+    return {
+        html,
+        initialState,
+    };
 };
