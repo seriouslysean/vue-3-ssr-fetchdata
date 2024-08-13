@@ -16,7 +16,7 @@ const handleIncrement = () => {
       <li><router-link to="/about">About</router-link></li>
     </ul>
 
-    <p>Clicking between routes will also reset the data and re-fetch it using route guards in <pre>vue-router</pre>.</p>
+    <p>Clicking between routes will also reset the data and re-fetch it using route guards in <strong>vue-router</strong>.</p>
 
     <router-view></router-view>
 
