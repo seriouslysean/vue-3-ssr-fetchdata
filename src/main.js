@@ -1,6 +1,8 @@
 import { createSSRApp } from 'vue';
 import { createPinia } from 'pinia';
 
+import { createAppRouter } from './router';
+
 import App from './App.vue';
 
 export const createApp = (isClient = false) => {
@@ -9,7 +11,11 @@ export const createApp = (isClient = false) => {
    * and send it to the user to do hydration process
    */
   const pinia = createPinia();
+  const router = createAppRouter(isClient);
   const app = createSSRApp(App);
+
+  // Add vue router
+  app.use(router);
 
   // Add pinia
   app.use(pinia);
@@ -21,5 +27,6 @@ export const createApp = (isClient = false) => {
   return {
     app,
     pinia,
+    router,
   };
 };

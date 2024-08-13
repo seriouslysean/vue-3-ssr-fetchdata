@@ -1,4 +1,5 @@
 import { ref, onServerPrefetch, onMounted } from 'vue';
+import { onBeforeRouteLeave } from 'vue-router';
 
 import { useFetchDataStore } from '../stores/fetch-data';
 
@@ -27,6 +28,12 @@ export function useFetchDataWithStore() {
       // data.value = await fetchOnClient(/* ... */);
       store.data = 'clientFetch';
     }
+  });
+
+  onBeforeRouteLeave(() => {
+    console.log('[ufdws]: resetting store');
+    store.$reset();
+    data.isMounted = false;
   });
 
   return {

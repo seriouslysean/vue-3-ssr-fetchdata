@@ -1,4 +1,5 @@
 import { ref, onServerPrefetch, onMounted } from 'vue';
+import { onBeforeRouteLeave } from 'vue-router';
 
 const isMounted = ref(false);
 const data = ref(null);
@@ -25,6 +26,12 @@ export function useFetchData() {
       // data.value = await fetchOnClient(/* ... */);
       data.value = 'clientFetch';
     }
+  });
+
+  onBeforeRouteLeave(() => {
+    console.log('[ufd]: setting data=null');
+    data.value = null;
+    data.isMounted = false;
   });
 
   return {

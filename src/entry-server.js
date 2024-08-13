@@ -8,8 +8,13 @@ import { createApp } from './main';
  * which can be sent from the server to the cleint
  */
 
-export const render = async () => {
-  const { app, pinia } = createApp();
+export const render = async (req) => {
+  const { app, pinia, router } = createApp();
+
+  // Set base url
+  router.push(req.url);
+  await router.isReady();
+
   const html = await renderToString(app);
 
   const initialState = JSON.stringify(pinia.state.value);
