@@ -8,10 +8,9 @@ const routes = [
   { path: '/about', component: AboutView },
 ]
 
-export function createAppRouter(isClient = false) {
-    const history = isClient ? createWebHistory() : createMemoryHistory()
+export function createAppRouter() {
     return createRouter({
-        history,
+        history: import.meta.env.SSR ? createMemoryHistory() : createWebHistory(),
         routes,
       });
 }

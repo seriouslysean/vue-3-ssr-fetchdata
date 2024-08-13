@@ -21,13 +21,11 @@ const ufdwsResults = useFetchDataWithStore();
         server data would persist but that would require the use of a data store
         and to hydrate it to the client.
       </p>
-      <pre>isMounted: {{ ufdResults.isMounted }}</pre>
       <pre>data: {{ ufdResults.data }}</pre>
     </div>
 
     <div class="section">
       <h3>useFetchDataWithStore (fixed)</h3>
-      <pre>isMounted: {{ ufdwsResults.isMounted }}</pre>
       <pre>data: {{ ufdwsResults.data }}</pre>
     </div>
   </div>

@@ -9,7 +9,7 @@ const handleIncrement = () => {
 
 <template>
   <div class="app">
-    <h1>Vue 3 SSR - fetchData</h1>
+    <h1>Vue 3 SSR - fetchData ({{ $route.path }})</h1>
 
     <ul>
       <li><router-link to="/">Home</router-link></li>

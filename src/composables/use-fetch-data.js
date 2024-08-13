@@ -1,21 +1,11 @@
 import { ref, onServerPrefetch, onMounted } from 'vue';
-import { onBeforeRouteLeave } from 'vue-router';
-
-const isMounted = ref(false);
-const data = ref(null);
+import { onBeforeRouteUpdate, onBeforeRouteLeave } from 'vue-router';
 
 export function useFetchData() {
-  onServerPrefetch(async () => {
-    // component is rendered as part of the initial request
-    // pre-fetch data on server as it is faster than on the client
-    // data.value = await fetchOnServer(/* ... */);
-    data.value = 'serverFetch';
-  });
+  const data = ref(null);
 
-  onMounted(async () => {
-    // Toggle mounted to show we're in the client
-    isMounted.value = true;
-
+  // Need an abstracted function so we only do this once
+  async function fetchClientData() {
     // Artificial 1s delay to see the bug
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
@@ -26,16 +16,29 @@ export function useFetchData() {
       // data.value = await fetchOnClient(/* ... */);
       data.value = 'clientFetch';
     }
+  }
+
+  onServerPrefetch(async () => {
+    // component is rendered as part of the initial request
+    // pre-fetch data on server as it is faster than on the client
+    // data.value = await fetchOnServer(/* ... */);
+    data.value = 'serverFetch';
+  });
+
+  onMounted(async () => {
+    await fetchClientData();
+  });
+
+  onBeforeRouteUpdate(async () => {
+    await fetchClientData();
   });
 
   onBeforeRouteLeave(() => {
     console.log('[ufd]: setting data=null');
     data.value = null;
-    data.isMounted = false;
   });
 
   return {
-    isMounted,
     data,
   };
 }
