@@ -1,10 +1,12 @@
-import { onServerPrefetch, onMounted } from 'vue';
+import { computed, onServerPrefetch, onMounted } from 'vue';
 import { onBeforeRouteUpdate, onBeforeRouteLeave } from 'vue-router';
 
 import { useFetchDataStore } from '../stores/fetch-data';
 
 export function useFetchDataWithStore() {
   const store = useFetchDataStore();
+
+  const data = computed(() => store.data);
 
   // Need an abstracted function so we only do this once
   async function fetchClientData() {
@@ -33,7 +35,6 @@ export function useFetchDataWithStore() {
 
   onBeforeRouteUpdate(async () => {
     await fetchClientData();
-    debugger;
   });
 
   onBeforeRouteLeave(() => {
@@ -42,6 +43,6 @@ export function useFetchDataWithStore() {
   });
 
   return {
-    data: store.data,
+    data,
   };
 }
